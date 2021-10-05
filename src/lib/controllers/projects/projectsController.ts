@@ -1,7 +1,7 @@
-import type { Controller } from '../../types';
-import type { NextFunction, Request, Response } from 'express';
-import { Router } from 'express';
-import { getProjectsFromApi } from './projectsHandlers';
+import type { Controller } from "../../types";
+import type { NextFunction, Request, Response } from "express";
+import { Router } from "express";
+import { getProjectsFromApi } from "./projectsHandlers";
 
 /**
  * The ProjectsController class for handling user projects
@@ -11,7 +11,7 @@ import { getProjectsFromApi } from './projectsHandlers';
  */
 export class ProjectsController implements Controller {
   // The base URL path for this controller
-  public path = '/projects';
+  public path = "/projects";
   // Express router for this controller
   public router = Router();
 
@@ -38,8 +38,8 @@ export class ProjectsController implements Controller {
   private async getProjects(req: Request, res: Response, next: NextFunction) {
     try {
       const projects = await getProjectsFromApi();
-      return res.render('projects', {
-        projects,
+      return res.render("projects", {
+        projects
       });
     } catch (error) {
       return next(error);

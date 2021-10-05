@@ -1,20 +1,20 @@
-import express from 'express';
-import { reqError } from './lib/middlewares';
-import * as path from 'path';
-import { envCheck, Severity } from 'envar-check';
-import * as fs from 'fs';
-import { join } from 'path';
-import type { Application } from 'express';
-import type { Server } from 'http';
-import type { Controller } from './lib/types';
-import { Envars, Config } from './lib/types';
-import config from 'config';
-import passport from 'passport';
-import expressSession from 'express-session';
-import { getOAuth2 } from './lib/utils/OAuth2Strategy';
-import { v4 as uuidv4 } from 'uuid';
-import helmet from 'helmet';
-import rateLimit from 'express-rate-limit';
+import express from "express";
+import { reqError } from "./lib/middlewares";
+import * as path from "path";
+import { envCheck, Severity } from "envar-check";
+import * as fs from "fs";
+import { join } from "path";
+import type { Application } from "express";
+import type { Server } from "http";
+import type { Controller } from "./lib/types";
+import { Envars, Config } from "./lib/types";
+import config from "config";
+import passport from "passport";
+import expressSession from "express-session";
+import { getOAuth2 } from "./lib/utils/OAuth2Strategy";
+import { v4 as uuidv4 } from "uuid";
+import helmet from "helmet";
+import rateLimit from "express-rate-limit";
 
 export const API_BASE = config.get(Config.ApiBase);
 export const APP_BASE = config.get(Config.AppBase);
@@ -55,7 +55,7 @@ class App {
    */
   private initRoutes(controllers: Controller[]) {
     controllers.forEach((controller: Controller) => {
-      this.app.use('/', controller.router);
+      this.app.use("/", controller.router);
     });
   }
 
@@ -95,24 +95,24 @@ class App {
   private initGlobalMiddlewares() {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
-    this.app.set('views', path.join(__dirname, '/views'));
-    this.app.set('view engine', 'ejs');
-    this.app.use('/public', express.static(path.join(__dirname, '/public')));
+    this.app.set("views", path.join(__dirname, "/views"));
+    this.app.set("view engine", "ejs");
+    this.app.use("/public", express.static(path.join(__dirname, "/public")));
     this.app.use(expressSession({ secret: uuidv4(), resave: false, saveUninitialized: true }));
     this.app.use(
       helmet({
         contentSecurityPolicy: {
           directives: {
             ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-            'script-src': ["'self'", "'unsafe-inline'"], // Required for onclick inline handlers
-            'script-src-attr': ["'self'", "'unsafe-inline'"], // Required for onclick inline handlers
-          },
-        },
-      }),
+            "script-src": ["'self'", "'unsafe-inline'"], // Required for onclick inline handlers
+            "script-src-attr": ["'self'", "'unsafe-inline'"] // Required for onclick inline handlers
+          }
+        }
+      })
     );
     const limiter = rateLimit({
       windowMs: 15 * 60 * 1000, // 5 minutes
-      max: 100, // limit each IP to 100 requests per windowMs
+      max: 100 // limit each IP to 100 requests per windowMs
     });
     this.app.use(limiter);
     this.setupPassport();
@@ -132,7 +132,7 @@ class App {
   private checkEnvVars() {
     envCheck(
       [Envars.ClientId, Envars.ClientSecret, Envars.RedirectUri, Envars.Scopes, Envars.EncryptionSecret],
-      Severity.FATAL,
+      Severity.FATAL
     );
   }
 
@@ -141,9 +141,9 @@ class App {
    */
   private initDatabaseFile() {
     try {
-      const dbFolder = join(__dirname, '../db');
-      dbPath = join(dbFolder, 'db.json');
-      console.log('Using db: ' + dbPath);
+      const dbFolder = join(__dirname, "../db");
+      dbPath = join(dbFolder, "db.json");
+      console.log("Using db: " + dbPath);
 
       if (!fs.existsSync(dbPath)) {
         if (!fs.existsSync(dbFolder)) {

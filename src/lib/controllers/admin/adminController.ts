@@ -1,7 +1,7 @@
-import type { Controller } from '../../types';
-import type { NextFunction, Request, Response } from 'express';
-import { Router } from 'express';
-import { readFromDb } from '../../utils/db';
+import type { Controller } from "../../types";
+import type { NextFunction, Request, Response } from "express";
+import { Router } from "express";
+import { readFromDb } from "../../utils/db";
 
 /**
  * The AdminController class for handling admin page
@@ -11,7 +11,7 @@ import { readFromDb } from '../../utils/db';
  */
 export class AdminController implements Controller {
   // The base URL path for this controller
-  public path = '/admin';
+  public path = "/admin";
   // Express router for this controller
   public router: Router = Router();
 
@@ -35,8 +35,8 @@ export class AdminController implements Controller {
    */
   private async installs(req: Request, res: Response, next: NextFunction) {
     const db = await readFromDb();
-    return res.render('admin-installs', {
-      installs: db.installs || [],
+    return res.render("admin-installs", {
+      installs: db.installs || []
     });
   }
 
@@ -44,6 +44,6 @@ export class AdminController implements Controller {
    * @returns Renders the settings page
    */
   private async settings(req: Request, res: Response, next: NextFunction) {
-    return res.render('admin-settings');
+    return res.render("admin-settings");
   }
 }

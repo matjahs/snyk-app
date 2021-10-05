@@ -1,4 +1,4 @@
-import type { Router } from 'express';
+import type { Router } from "express";
 
 export interface Controller {
   path: string;

@@ -1,4 +1,4 @@
-import { callSnykApi } from '../api';
+import { callSnykApi } from "../api";
 
 /**
  * Function to get user's Snyk Org ID and Name that may be used in
@@ -9,24 +9,24 @@ import { callSnykApi } from '../api';
  */
 export async function getUserOrgInfo(
   access_token: string,
-  token_type: string,
+  token_type: string
 ): Promise<{ orgId: string; orgName: string }> {
   try {
     const result = await callSnykApi(
       access_token,
-      token_type,
+      token_type
     )({
-      method: 'GET',
-      url: `/user/me`,
+      method: "GET",
+      url: `/user/me`
     });
     // Fetch the first org for demo purposes
     const org = result.data.orgs[0];
     return {
       orgId: org.id,
-      orgName: org.name,
+      orgName: org.name
     };
   } catch (error) {
-    console.error('Error fetching org info: ' + error);
+    console.error("Error fetching org info: " + error);
     throw error;
   }
 }

@@ -1,12 +1,12 @@
-import type { Request } from 'express';
-import OAuth2Strategy, { VerifyCallback } from 'passport-oauth2';
-import { writeToDb } from '../db';
-import { EncryptDecrypt } from '../encrypt-decrypt';
-import { Envars, AuthData, Config } from '../../types';
-import { API_BASE, APP_BASE } from '../../../app';
-import { getUserOrgInfo } from '../apiRequests';
-import config from 'config';
-import jwt_decode from 'jwt-decode';
+import type { Request } from "express";
+import OAuth2Strategy, { VerifyCallback } from "passport-oauth2";
+import { writeToDb } from "../db";
+import { EncryptDecrypt } from "../encrypt-decrypt";
+import { Envars, AuthData, Config } from "../../types";
+import { API_BASE, APP_BASE } from "../../../app";
+import { getUserOrgInfo } from "../apiRequests";
+import config from "config";
+import jwt_decode from "jwt-decode";
 
 type Params = {
   expires_in: number;
@@ -49,9 +49,9 @@ export function getOAuth2(nonce: string): OAuth2Strategy {
       clientSecret,
       callbackURL,
       scope,
-      scopeSeparator: ' ',
+      scopeSeparator: " ",
       state: true,
-      passReqToCallback: true,
+      passReqToCallback: true
     },
     async function (
       req: Request,
@@ -59,11 +59,11 @@ export function getOAuth2(nonce: string): OAuth2Strategy {
       refresh_token: string,
       params: Params,
       profile: unknown,
-      done: VerifyCallback,
+      done: VerifyCallback
     ) {
       try {
         const decoded: JWT = jwt_decode(access_token);
-        if (nonce !== decoded.nonce) throw new Error('Nonce values do not match');
+        if (nonce !== decoded.nonce) throw new Error("Nonce values do not match");
         const { expires_in, scope, token_type } = params;
         const { orgId, orgName } = await getUserOrgInfo(access_token, token_type);
         const ed = new EncryptDecrypt(process.env[Envars.EncryptionSecret] as string);
@@ -76,12 +76,12 @@ export function getOAuth2(nonce: string): OAuth2Strategy {
           scope,
           token_type,
           refresh_token: ed.encryptString(refresh_token),
-          nonce,
+          nonce
         } as AuthData);
       } catch (error) {
         return done(error as Error, false);
       }
       return done(null, { nonce });
-    },
+    }
   );
 }

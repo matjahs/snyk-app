@@ -5,19 +5,19 @@ import {
   ProjectsController,
   SettingsController,
   AuthController,
-  AdminController,
-} from './lib/controllers';
-import App from './app';
-import config from 'config';
-import { Config } from '../src/lib/types';
-import * as path from 'path';
-import * as dotenv from 'dotenv';
+  AdminController
+} from "./lib/controllers";
+import App from "./app";
+import config from "config";
+import { Config } from "../src/lib/types";
+import * as path from "path";
+import * as dotenv from "dotenv";
 
 /**
  * The package dotenv is used to load all your environmental
  * variables from the specified file path.
  */
-dotenv.config({ path: path.join(__dirname, '../.env') });
+dotenv.config({ path: path.join(__dirname, "../.env") });
 
 /**
  * Creates a new app instance
@@ -34,7 +34,7 @@ new App(
     new AuthController(),
     new ProjectsController(),
     new SettingsController(),
-    new DefaultController(),
+    new DefaultController()
   ],
-  config.get(Config.Port),
+  config.get(Config.Port)
 );

@@ -1,6 +1,6 @@
-import type { Controller } from '../../types';
-import { Router } from 'express';
-import type { Request, Response, NextFunction } from 'express';
+import type { Controller } from "../../types";
+import { Router } from "express";
+import type { Request, Response, NextFunction } from "express";
 
 /**
  * The DefaultController class for all unhandled requests.
@@ -14,7 +14,7 @@ export class DefaultController implements Controller {
    * as this means it will be match is express finds no
    * other path to match to
    * */
-  public path = '*';
+  public path = "*";
   // Express router for this controller
   public router = Router();
 
@@ -32,6 +32,6 @@ export class DefaultController implements Controller {
   }
 
   private notFound(req: Request, res: Response, next: NextFunction) {
-    return res.render('default');
+    return res.render("default");
   }
 }

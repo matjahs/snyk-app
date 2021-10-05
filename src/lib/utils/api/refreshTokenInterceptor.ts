@@ -1,11 +1,11 @@
-import type { AxiosRequestConfig } from 'axios';
-import { Envars } from '../../types';
-import { DateTime } from 'luxon';
-import { readFromDb } from '../db';
-import { mostRecent } from '../../controllers/projects/projectsHandlers';
-import { EncryptDecrypt } from '../encrypt-decrypt';
-import { refreshAuthToken } from '../apiRequests';
-import { updateDb } from '../db';
+import type { AxiosRequestConfig } from "axios";
+import { Envars } from "../../types";
+import { DateTime } from "luxon";
+import { readFromDb } from "../db";
+import { mostRecent } from "../../controllers/projects/projectsHandlers";
+import { EncryptDecrypt } from "../encrypt-decrypt";
+import { refreshAuthToken } from "../apiRequests";
+import { updateDb } from "../db";
 
 /**
  * An axios interceptor that will refresh the auth token
@@ -32,7 +32,7 @@ export async function refreshTokenInterceptor(request: AxiosRequestConfig): Prom
     const eD = new EncryptDecrypt(process.env[Envars.EncryptionSecret] as string);
     // Make request to refresh token
     const { access_token, expires_in, refresh_token, scope, token_type } = await refreshAuthToken(
-      eD.decryptString(data.refresh_token),
+      eD.decryptString(data.refresh_token)
     );
     // Update the acess and refresh token with the newly fetched access and refresh token
     // along with the expiry and other required info
@@ -43,7 +43,7 @@ export async function refreshTokenInterceptor(request: AxiosRequestConfig): Prom
       refresh_token: eD.encryptString(refresh_token),
       token_type,
       scope,
-      date: new Date(),
+      date: new Date()
     });
   }
   return request;

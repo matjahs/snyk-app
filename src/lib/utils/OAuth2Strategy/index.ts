@@ -1,1 +1,1 @@
-export * from './OAuth2Strategy';
+export * from "./OAuth2Strategy";

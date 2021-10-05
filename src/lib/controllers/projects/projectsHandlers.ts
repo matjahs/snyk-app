@@ -1,7 +1,7 @@
-import { readFromDb } from '../../utils/db';
-import { callSnykApi } from '../../utils/api';
-import { EncryptDecrypt } from '../../utils/encrypt-decrypt';
-import { AuthData, Envars } from '../../types';
+import { readFromDb } from "../../utils/db";
+import { callSnykApi } from "../../utils/api";
+import { EncryptDecrypt } from "../../utils/encrypt-decrypt";
+import { AuthData, Envars } from "../../types";
 
 /**
  * Get projects handler that fetches all user projects

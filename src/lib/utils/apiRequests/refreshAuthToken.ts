@@ -1,9 +1,9 @@
-import axios from 'axios';
-import qs from 'qs';
-import { GrantType } from '../../types/grantType';
-import { AuthData, Config, Envars } from '../../types';
-import { API_BASE } from '../../../app';
-import config from 'config';
+import axios from "axios";
+import qs from "qs";
+import { GrantType } from "../../types/grantType";
+import { AuthData, Config, Envars } from "../../types";
+import { API_BASE } from "../../../app";
+import config from "config";
 
 /**
  * This functions calls the Snyk API to refresh the auth token, using the existing
@@ -17,14 +17,14 @@ export async function refreshAuthToken(refreshToken: string): Promise<AuthData> 
     grant_type: GrantType.RefreshToken,
     client_id: process.env[Envars.ClientId],
     client_secret: process.env[Envars.ClientSecret],
-    refresh_token: refreshToken,
+    refresh_token: refreshToken
   });
   try {
     const result = await axios({
-      method: 'POST',
-      headers: { 'content-type': 'application/x-www-form-urlencoded' },
+      method: "POST",
+      headers: { "content-type": "application/x-www-form-urlencoded" },
       url: `${API_BASE}${config.get(Config.TokenURL)}`,
-      data: querystring,
+      data: querystring
     });
     return result.data;
   } catch (error: unknown) {

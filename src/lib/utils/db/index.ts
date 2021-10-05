@@ -1,3 +1,3 @@
-export * from './writeToDb';
-export * from './readFromDb';
-export * from './updateDb';
+export * from "./writeToDb";
+export * from "./readFromDb";
+export * from "./updateDb";

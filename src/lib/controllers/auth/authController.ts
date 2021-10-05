@@ -1,6 +1,6 @@
-import { Controller } from '../../types';
-import { Router } from 'express';
-import passport from 'passport';
+import { Controller } from "../../types";
+import { Router } from "express";
+import passport from "passport";
 
 /**
  * The AuthController class for handling authentication
@@ -11,7 +11,7 @@ import passport from 'passport';
  */
 export class AuthController implements Controller {
   // The base URL path for this controller
-  public path = '/auth';
+  public path = "/auth";
   // Express router for this controller
   public router = Router();
 
@@ -28,6 +28,6 @@ export class AuthController implements Controller {
    * via Snyk using passportjs authenticate method
    */
   private initRoutes() {
-    this.router.get(`${this.path}`, passport.authenticate('oauth2'));
+    this.router.get(`${this.path}`, passport.authenticate("oauth2"));
   }
 }

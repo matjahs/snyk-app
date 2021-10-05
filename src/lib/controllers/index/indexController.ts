@@ -1,6 +1,6 @@
-import type { Controller } from '../../types';
-import type { Request, Response, NextFunction } from 'express';
-import { Router } from 'express';
+import type { Controller } from "../../types";
+import type { Request, Response, NextFunction } from "express";
+import { Router } from "express";
 
 /**
  * The IndexController class for handling index/home page
@@ -10,7 +10,7 @@ import { Router } from 'express';
  */
 export class IndexController implements Controller {
   // The base URL path for this controller
-  public path = '/';
+  public path = "/";
   // Express router for this controller
   public router = Router();
 
@@ -34,7 +34,7 @@ export class IndexController implements Controller {
    * asks the user to install the app
    */
   private indexPage(req: Request, res: Response, next: NextFunction) {
-    if (req.user) return res.redirect('/projects');
-    return res.render('index');
+    if (req.user) return res.redirect("/projects");
+    return res.render("index");
   }
 }

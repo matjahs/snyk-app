@@ -1,6 +1,6 @@
-import type { Controller } from '../../types';
-import type { NextFunction, Request, Response } from 'express';
-import { Router } from 'express';
+import type { Controller } from "../../types";
+import type { NextFunction, Request, Response } from "express";
+import { Router } from "express";
 
 /**
  * The SettingsController class for handling settings page
@@ -10,7 +10,7 @@ import { Router } from 'express';
  */
 export class SettingsController implements Controller {
   // The base URL path for this controller
-  public path = '/settings';
+  public path = "/settings";
   // Express router for this controller
   public router: Router = Router();
 
@@ -31,6 +31,6 @@ export class SettingsController implements Controller {
    * @returns render the user settings page
    */
   private displaySettings(req: Request, res: Response, next: NextFunction) {
-    return res.render('settings');
+    return res.render("settings");
   }
 }

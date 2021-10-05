@@ -1,8 +1,8 @@
-import { AxiosInstance } from 'axios';
-import { APIVersion } from '../../types';
-import { API_BASE } from '../../../app';
-import axios from 'axios';
-import { refreshTokenInterceptor } from '.';
+import { AxiosInstance } from "axios";
+import { APIVersion } from "../../types";
+import { API_BASE } from "../../../app";
+import axios from "axios";
+import { refreshTokenInterceptor } from ".";
 
 /**
  * Utility function to call the Snyk API
@@ -16,9 +16,9 @@ export function callSnykApi(tokenType: string, token: string, version: APIVersio
   let axiosInstance = axios.create({
     baseURL: `${API_BASE}/v1`,
     headers: {
-      'Content-Type': 'application/json',
-      Authorization: `${token} ${tokenType}`,
-    },
+      "Content-Type": "application/json",
+      Authorization: `${token} ${tokenType}`
+    }
   });
 
   // If user selection V3
@@ -26,9 +26,9 @@ export function callSnykApi(tokenType: string, token: string, version: APIVersio
     axiosInstance = axios.create({
       baseURL: `${API_BASE}/v3`,
       headers: {
-        'Content-Type': 'application/vnd.api+json',
-        Authorization: `${tokenType} ${token}`,
-      },
+        "Content-Type": "application/vnd.api+json",
+        Authorization: `${tokenType} ${token}`
+      }
     });
   }
 

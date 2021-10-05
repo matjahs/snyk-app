@@ -1,8 +1,8 @@
-import type { Controller } from '../../types';
-import type { NextFunction, Request, Response } from 'express';
-import { Router } from 'express';
-import { HttpException } from '../../exceptions';
-import passport from 'passport';
+import type { Controller } from "../../types";
+import type { NextFunction, Request, Response } from "express";
+import { Router } from "express";
+import { HttpException } from "../../exceptions";
+import passport from "passport";
 
 /**
  * The CallbackController class for handling the last
@@ -13,7 +13,7 @@ import passport from 'passport';
  */
 export class CallbackController implements Controller {
   // The base URL path for this controller
-  public path = '/callback';
+  public path = "/callback";
   // Express router for this controller
   public router: Router = Router();
 
@@ -35,9 +35,9 @@ export class CallbackController implements Controller {
   }
 
   private passportAuthenticatte() {
-    return passport.authenticate('oauth2', {
-      successRedirect: '/callback/success',
-      failureRedirect: '/callback/failure',
+    return passport.authenticate("oauth2", {
+      successRedirect: "/callback/success",
+      failureRedirect: "/callback/failure"
     });
   }
   /**
@@ -45,7 +45,7 @@ export class CallbackController implements Controller {
    * @returns The callback EJS template
    */
   private success(req: Request, res: Response, next: NextFunction) {
-    return res.render('callback');
+    return res.render("callback");
   }
   /**
    * Handle the failure response of authentication
@@ -53,6 +53,6 @@ export class CallbackController implements Controller {
    * error handler middleware
    */
   private failure(req: Request, res: Response, next: NextFunction) {
-    return next(new HttpException(401, 'Authentication failed'));
+    return next(new HttpException(401, "Authentication failed"));
   }
 }
